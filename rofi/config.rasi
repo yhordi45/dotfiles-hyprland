@@ -1,0 +1,43 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    font: "JetBrainsMono Nerd Font 12";
+    icon-theme: "Adwaita"; /* Iconos por defecto de Fedora */
+    display-drun: "Apps";
+    display-run: "Ejecutar";
+    display-window: "Ventanas";
+}
+
+/* Un tema oscuro básico integrado para no depender de archivos externos */
+* {
+    background-color:      #1E1E2E;
+    text-color:           #CDD6F4;
+    border-color:         #313244;
+}
+
+window {
+    padding: 20px;
+    border: 2px;
+    border-radius: 10px;
+    width: 500px;
+}
+
+inputbar {
+    children: [ prompt, entry ];
+    padding: 10px;
+}
+
+listview {
+    lines: 10;
+    scrollbar: false;
+}
+
+element {
+    padding: 8px;
+    border-radius: 5px;
+}
+
+element selected {
+    background-color: #89B4FA;
+    text-color: #1E1E2E;
+}
