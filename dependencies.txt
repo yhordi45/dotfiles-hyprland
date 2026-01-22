@@ -1,0 +1,30 @@
+# --- LISTA DE PAQUETES NECESARIOS (Fedora) ---
+
+# Entorno Base
+hyprland          # El Compositor (Gestor de ventanas)
+kitty             # Terminal
+waybar            # Barra de estado
+rofi              # Lanzador de aplicaciones
+swaybg            # Fondo de pantalla (Reemplazo de hyprpaper)
+wlogout           # Menú de salida/apagado
+dunst             # Notificaciones
+
+# Utilidades de Sistema
+polkit-gnome      # Autenticación gráfica (sudo visual)
+hyprland-qtutils  # Ventanas de diálogo de Hyprland
+pamixer           # Control de volumen por terminal
+brightnessctl     # Control de brillo
+playerctl         # Control multimedia (Play/Pause)
+
+# Captura y Portapapeles
+grim              # Toma la captura
+slurp             # Selecciona el área
+wl-clipboard      # Gestiona copiar/pegar (wl-copy)
+cliphist          # Historial del portapapeles
+
+# Fuentes
+fontawesome-fonts # Iconos generales
+# JetBrainsMono Nerd Font (Se instala manualmente o vía script)
+
+# Gestor de Archivos (Opcional pero recomendado)
+nautilus          # O Thunar

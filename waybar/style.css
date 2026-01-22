@@ -1,34 +1,72 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+    font-size: 14px;
     min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    background: transparent;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#waybar {
+    background: transparent;
+}
+
+/* --- Módulos IZQUIERDA (Reloj y Workspaces) --- */
+.modules-left {
+    background: rgba(30, 30, 46, 0.85); /* Fondo oscuro semitransparente */
+    margin: 5px 0 0 10px;
+    padding: 0 5px;
+    border-radius: 15px;
+    border: 2px solid rgba(137, 180, 250, 0.3); /* Borde sutil azulado */
+}
+
+/* --- Módulo CENTRO (Título Ventana) --- */
+.modules-center {
+    background: #11111b; /* Fondo casi negro sólido para mejor lectura */
+    margin: 5px 0 0 0;
+    padding: 0 15px;
+    border-radius: 15px;
+    border: 2px solid #89b4fa; /* Borde azul más visible */
+    color: #ffffff; /* Texto BLANCO PURO */
+    font-weight: bold;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8); /* Sombra negra al texto para que resalte */
+}
+
+/* Regla específica para el texto del título */
+#window {
     color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;
+    font-weight: bold;
+}
+
+/* --- Módulos DERECHA (Hardware y Herramientas) --- */
+.modules-right {
+    background: rgba(30, 30, 46, 0.85);
+    margin: 5px 10px 0 0;
+    padding: 0 5px;
+    border-radius: 15px;
+    border: 2px solid rgba(137, 180, 250, 0.3);
 }
 
 #workspaces button {
     padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+    color: #cdd6f4;
+}
+
+#workspaces button.active {
+    color: #89b4fa;
+    border-bottom: 2px solid #89b4fa;
 }
 
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
-    box-shadow: inherit;
-    border-bottom: 3px solid #ffffff;
-}
-
-#workspaces button.active {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
 }
 
 #clock,
@@ -44,10 +82,70 @@ window#waybar {
 #tray,
 #mode,
 #idle_inhibitor,
-#mpd {
+#custom-power {
     padding: 0 10px;
+    margin: 0 2px;
+    color: #cdd6f4;
+}
+
+#clock {
+    color: #fab387; /* Color melocotón para la hora */
+    font-weight: bold;
+}
+
+#battery {
+    color: #a6e3a1; /* Verde */
+}
+
+#battery.charging {
     color: #ffffff;
-    margin: 0 4px;
-    background-color: #2b303b;
-    border-radius: 10px;
+    background-color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #ffbe61;
+    color: black;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    color: #f9e2af; /* Amarillo */
+}
+
+#memory {
+    color: #cba6f7; /* Violeta */
+}
+
+#backlight {
+    color: #89b4fa; /* Azul */
+}
+
+#pulseaudio {
+    color: #f5c2e7; /* Rosa */
+}
+
+#pulseaudio.muted {
+    color: #90b1b1;
+}
+
+#custom-power {
+    color: #f38ba8; /* Rojo suave */
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
 }
