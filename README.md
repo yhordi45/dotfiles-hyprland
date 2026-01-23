@@ -9,11 +9,13 @@ Configuración personal y completa de **Hyprland** para Fedora Workstation. Una 
 - **🔍 Rofi**: Lanzador de aplicaciones rápido y configurable
 - **💻 Kitty**: Emulador de terminal con transparencia y temas
 - **🖼️ Hyprpaper**: Gestor de fondos de pantalla
-- **📸 Capturas de pantalla**: Integración con Grim y Slurp
+- **📸 Capturas de pantalla**: `Super + Shift + S` con Grim/Slurp; se guardan en Imágenes y se copian al portapapeles
+- **⏻ wlogout**: Menú de salida (apagar, reiniciar, cerrar sesión) con `Super + X` o desde Waybar
 - **📋 Portapapeles mejorado**: Historial con Cliphist
 - **🎨 Tema Catppuccin Mocha**: Colores modernos y suaves
 - **⌨️ Teclado latinoamericano**: Configurado por defecto (latam)
 - **👆 Gestos touchpad**: Soporte completo para gestos de 3 dedos
+- **🔊 Scripts de audio y brillo**: Volumen y micrófono (`volume.sh`), brillo (`brightness.sh`) con teclas de función
 
 ## 📋 Requisitos
 
@@ -38,7 +40,7 @@ Esta opción es ideal si quieres **probar la configuración** antes de instalar 
    - Completa la configuración inicial si es necesario
 
 2. **Abre una terminal**
-   - Presiona `Super + T` o busca "Terminal" en el menú
+   - Presiona `Super + Q` (Kitty) o busca "Terminal" en el menú
    - También puedes usar `Ctrl + Alt + T`
 
 3. **Clona el repositorio**
@@ -112,10 +114,11 @@ Esta es la opción recomendada si **ya tienes Fedora instalado** o planeas insta
    ```
    
    Este script:
-   - ✅ Instala Hyprland y todas las dependencias
+   - ✅ Instala Hyprland y todas las dependencias (Waybar, Rofi, Kitty, Hyprpaper, etc.)
+   - ✅ Instala wlogout, brightnessctl, Grim, Slurp, Cliphist y herramientas de audio
    - ✅ Descarga e instala fuentes Nerd Fonts (JetBrains Mono)
-   - ✅ Copia todas las configuraciones a `~/.config/`
-   - ✅ Configura permisos de ejecución para los scripts
+   - ✅ Copia todas las configuraciones y scripts a `~/.config/`
+   - ✅ Configura permisos de ejecución para los scripts (`volume.sh`, `brightness.sh`, `screenshot.sh`)
 
 5. **Configura tu wallpaper**
    ```bash
@@ -155,38 +158,70 @@ Esta es la opción recomendada si **ya tienes Fedora instalado** o planeas insta
 ### 🔄 Después de la Instalación
 
 Una vez que inicies sesión con Hyprland por primera vez:
-- Los scripts estarán listos para usar
-- Las capturas de pantalla se guardarán en `~/Imágenes/`
+- Los scripts de volumen, brillo y captura estarán listos para usar
+- Las capturas (`Super + Shift + S`) se guardan en `~/Imágenes/Screenshots/` y se copian al portapapeles
 - El historial del portapapeles funcionará automáticamente
-- Todos los atajos de teclado estarán configurados
+- Todos los atajos de teclado y controles de ratón estarán configurados
+- Puedes usar `Super + X` o el icono de energía en Waybar para abrir wlogout
 
 ---
 
 ## ⌨️ Atajos de Teclado Principales
+
+### Ventanas y aplicaciones
 
 | Atajo | Acción |
 |-------|--------|
 | `Super + Q` | Abrir terminal (Kitty) |
 | `Super + C` | Cerrar ventana activa |
 | `Super + M` | Salir de Hyprland |
+| `Super + X` | Menú de salida (wlogout) |
 | `Super + E` | Abrir gestor de archivos (Nautilus) |
 | `Super + F` | Activar/Desactivar ventana flotante |
 | `Super + R` | Abrir lanzador de aplicaciones (Rofi) |
 | `Super + B` | Abrir navegador (Brave) |
 | `Super + Z` | Historial del portapapeles |
-| `Print` | Captura de pantalla (región) |
+| `Super + Shift + S` | Captura de pantalla (región, guardada en Imágenes y portapapeles) |
 | `Super + 1-5` | Cambiar a workspace 1-5 |
 | `Super + Shift + 1-5` | Mover ventana a workspace 1-5 |
 | `Super + ←/→/↑/↓` | Mover foco entre ventanas |
 | `Super + P` | Activar modo pseudo (tiling) |
 | `Super + J` | Alternar división de ventanas |
-| `XF86AudioRaiseVolume` | Subir volumen |
-| `XF86AudioLowerVolume` | Bajar volumen |
-| `XF86AudioMute` | Silenciar/Activar sonido |
-| `XF86MonBrightnessUp` | Aumentar brillo |
-| `XF86MonBrightnessDown` | Disminuir brillo |
 
-> **Nota:** `Super` es la tecla Windows/Command en tu teclado
+### Teclas de función (por ejemplo Lenovo LOQ: Fn + tecla)
+
+| Tecla | Acción |
+|-------|--------|
+| `F1` (Mute) | Silenciar/Activar sonido |
+| `F2` | Bajar volumen |
+| `F3` | Subir volumen |
+| `F4` (Mic Mute) | Silenciar/Activar micrófono |
+| `F5` | Disminuir brillo |
+| `F6` | Aumentar brillo |
+| `F12` (Calculator) | Abrir calculadora (GNOME) |
+
+Volumen y brillo usan los scripts `volume.sh` y `brightness.sh` en `~/.config/hypr/scripts/`.
+
+### Multimedia (Fn + flechas / Inicio / Fin)
+
+| Tecla | Acción |
+|-------|--------|
+| `XF86AudioPlay` | Reproducir/Pausar |
+| `XF86AudioStop` | Detener |
+| `XF86AudioPrev` | Pista anterior |
+| `XF86AudioNext` | Pista siguiente |
+
+Requiere `playerctl` (`sudo dnf install playerctl`).
+
+### Ratón
+
+| Acción | Función |
+|--------|---------|
+| `Super + scroll abajo/arriba` | Cambiar de workspace |
+| `Super + botón izquierdo (arrastrar)` | Mover ventana |
+| `Super + botón derecho (arrastrar)` | Redimensionar ventana |
+
+> **Nota:** `Super` es la tecla Windows/Command en tu teclado.
 
 ---
 
@@ -283,7 +318,7 @@ fc-cache -fv
 
 ### Las capturas de pantalla no funcionan
 
-Verifica que Grim y Slurp estén instalados:
+Usa `Super + Shift + S` (no Print). Verifica que Grim y Slurp estén instalados:
 
 ```bash
 sudo dnf install grim slurp
@@ -291,10 +326,18 @@ sudo dnf install grim slurp
 
 ### El brillo no funciona
 
-Asegúrate de tener `brightnessctl` instalado:
+Los controles usan el script `~/.config/hypr/scripts/brightness.sh`. Asegúrate de tener `brightnessctl` instalado:
 
 ```bash
 sudo dnf install brightnessctl
+```
+
+### Las teclas multimedia (Play/Pause, siguiente, etc.) no funcionan
+
+Instala `playerctl`:
+
+```bash
+sudo dnf install playerctl
 ```
 
 ### Problemas con el portapapeles
@@ -318,6 +361,8 @@ wl-paste --type image --watch cliphist store &
 - **Aplicaciones opcionales**: El script instala `pavucontrol` para control de audio, pero puedes usar otra herramienta
 - **Navegador**: Por defecto está configurado Brave, pero puedes cambiarlo fácilmente
 - **Gestor de archivos**: Por defecto usa Nautilus (GNOME), puedes cambiarlo a Thunar, Nemo, etc.
+- **Salida**: `Super + M` cierra Hyprland directamente; `Super + X` abre wlogout (apagar, reiniciar, cerrar sesión, etc.)
+- **Capturas**: Se guardan en `~/Imágenes/Screenshots/` y también se copian al portapapeles. En algunos portátiles (p. ej. Lenovo) Print envía `Super + Shift + S`, que ya está configurado.
 
 ---
 
@@ -339,6 +384,7 @@ Este proyecto está bajo la licencia MIT. Siéntete libre de usar, modificar y d
 - [Waybar](https://github.com/Alexays/Waybar) - Barra de estado
 - [Rofi](https://github.com/davatorium/rofi) - Lanzador de aplicaciones
 - [Kitty](https://sw.kovidgoyal.net/kitty/) - Emulador de terminal
+- [wlogout](https://github.com/ArtsyMacaw/wlogout) - Menú de salida
 - [Catppuccin](https://github.com/catppuccin/catppuccin) - Paleta de colores
 
 ---

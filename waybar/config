@@ -122,5 +122,5 @@
     "tooltip": true,
     "tooltip-format-activated": "Pantalla SIEMPRE encendida",
     "tooltip-format-deactivated": "Ahorro de energía normal"
-    },
+    }
 }
