@@ -1,20 +1,24 @@
 #!/bin/bash
 
-# Define el nombre y la ruta del archivo
-DIR="$HOME/Imágenes/Screenshots"
+DIR="$HOME/Imágenes"
 FILE="$DIR/Captura_$(date +%Y-%m-%d_%H-%M-%S).png"
 
-# Crea la carpeta si no existe (por si acaso)
+# Crear carpeta si no existe
 if [ ! -d "$DIR" ]; then
     mkdir -p "$DIR"
 fi
 
-# Toma la captura:
-# 1. grim -g "$(slurp)"  -> Selecciona área
-# 2. -                   -> Manda la imagen a la salida estándar (memoria) en lugar de disco
-# 3. tee "$FILE"         -> Guarda una copia en tu disco
-# 4. wl-copy             -> Manda la otra copia al portapapeles
-grim -g "$(slurp)" - | tee "$FILE" | wl-copy
+# 1. Obtener la selección de área primero
+GEOMETRY=$(slurp)
 
-# (Opcional) Notificación para saber que funcionó
-notify-send "Captura tomada" "Guardada en Imágenes y copiada al portapapeles"
+# 2. VERIFICACIÓN: Si la geometría está vacía (porque diste Esc o Click Derecho)
+# el script se detiene aquí y NO crea ningún archivo.
+if [ -z "$GEOMETRY" ]; then
+    exit 0
+fi
+
+# 3. Si llegamos aquí, es que sí seleccionaste algo. Tomamos la foto.
+grim -g "$GEOMETRY" - | tee "$FILE" | wl-copy
+
+# Notificación (Opcional, la configuraremos mejor luego)
+notify-send "Captura Guardada" "Copiada al portapapeles"
