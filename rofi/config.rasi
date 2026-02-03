@@ -1,43 +1,176 @@
 configuration {
-    modi: "drun,run,window";
-    show-icons: true;
-    font: "JetBrainsMono Nerd Font 12";
-    icon-theme: "Adwaita"; /* Iconos por defecto de Fedora */
-    display-drun: "Apps";
-    display-run: "Ejecutar";
-    display-window: "Ventanas";
+    modi:                       "drun,run,filebrowser,window";
+    show-icons:                 true;
+    display-drun:               "";
+    display-run:                "";
+    display-filebrowser:        "";
+    display-window:             "";
+    drun-display-format:        "{name}";
+    window-format:              "{w} · {c} · {t}";
+    font:                       "JetBrainsMono Nerd Font 10";
 }
 
-/* Un tema oscuro básico integrado para no depender de archivos externos */
+/* --- TEMA ISLA FLOTANTE (Catppuccin Mocha) --- */
+
 * {
-    background-color:      #1E1E2E;
-    text-color:           #CDD6F4;
-    border-color:         #313244;
+    /* Añadimos 'bb' al final para dar transparencia (aprox 73%) */
+    background:                 #1e1e2ebb;
+    /* Añadimos '88' para que la barra de selección sea más transparente */
+    background-alt:             #31324488;
+    
+    foreground:                 #cdd6f4;
+    selected:                   #89b4fa;
+    active:                     #a6e3a1;
+    urgent:                     #f38ba8;
+    border-col:                 #89b4fa;
 }
 
 window {
-    padding: 20px;
-    border: 2px;
-    border-radius: 10px;
-    width: 500px;
+    /* Propiedades de la ventana flotante */
+    transparency:               "real";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    width:                      600px; /* Ancho cómodo */
+    x-offset:                   0px;
+    y-offset:                   0px;
+
+    /* Estilo */
+    enabled:                    true;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     2px solid;
+    border-radius:              15px; /* Bordes Redondeados */
+    border-color:               @border-col;
+    cursor:                     "default";
+    background-color:           @background;
+}
+
+mainbox {
+    enabled:                    true;
+    spacing:                    10px;
+    margin:                     0px;
+    padding:                    20px;
+    border:                     0px solid;
+    border-radius:              0px 0px 0px 0px;
+    border-color:               @border-col;
+    background-color:           transparent;
+    children:                   [ "inputbar", "listview" ];
 }
 
 inputbar {
-    children: [ prompt, entry ];
-    padding: 10px;
+    enabled:                    true;
+    spacing:                    10px;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px solid;
+    border-radius:              0px;
+    border-color:               @border-col;
+    background-color:           transparent;
+    text-color:                 @foreground;
+    children:                   [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                    true;
+    background-color:           @selected;
+    text-color:                 #1e1e2e; /* Texto oscuro en fondo azul */
+    padding:                    10px 15px;
+    border-radius:              10px;
+}
+
+entry {
+    enabled:                    true;
+    background-color:           @background-alt;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "Buscar aplicación...";
+    placeholder-color:          inherit;
+    padding:                    10px 15px;
+    border-radius:              10px;
 }
 
 listview {
-    lines: 10;
-    scrollbar: false;
+    enabled:                    true;
+    columns:                    1;
+    lines:                      8; /* Cantidad de items visibles */
+    cycle:                      true;
+    dynamic:                    true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               true;
+    fixed-columns:              true;
+    
+    spacing:                    5px;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px solid;
+    border-radius:              0px;
+    border-color:               @border-col;
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     "default";
 }
 
 element {
-    padding: 8px;
-    border-radius: 5px;
+    enabled:                    true;
+    spacing:                    10px;
+    margin:                     0px;
+    padding:                    10px;
+    border:                     0px solid;
+    border-radius:              10px; /* Elementos redondeados */
+    border-color:               @border-col;
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     pointer;
 }
 
-element selected {
-    background-color: #89B4FA;
-    text-color: #1E1E2E;
+element {
+    enabled:                    true;
+    spacing:                    10px;
+    margin:                     0px;
+    padding:                    10px;
+    border:                     0px solid;
+    border-radius:              10px;
+    border-color:               @border-col;
+    background-color:           transparent;
+    text-color:                 @foreground;
+    cursor:                     pointer;
+}
+
+/* Estado Normal (Filas impares) */
+element normal.normal {
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+/* Estado Alterno (Filas pares) */
+element alternate.normal {
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+/* Estado Seleccionado */
+element selected.normal {
+    background-color:           @background-alt;
+    text-color:                 @selected;
+    border:                     0px 0px 0px 2px;
+    border-color:               @selected;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 inherit;
+    size:                       24px;
+    cursor:                     inherit;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 inherit;
+    highlight:                  inherit;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0.0;
 }
