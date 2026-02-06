@@ -2,9 +2,10 @@
 
 echo "🚀 Iniciando instalación de Dotfiles Hyprland para Fedora..."
 
-# 1. Instalar paquetes necesarios (Agregado wlogout)
+# 1. Instalar paquetes necesarios
 echo "📦 Instalando paquetes..."
-sudo dnf install -y hyprland waybar rofi kitty hyprpaper \
+sudo dnf install -y hyprland waybar rofi kitty \
+    swww pamixer \
     brightnessctl grim slurp wl-clipboard cliphist \
     pavucontrol polkit-gnome unzip fontawesome-fonts \
     wlogout

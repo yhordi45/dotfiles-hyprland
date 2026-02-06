@@ -5,7 +5,7 @@ hyprland          # El Compositor (Gestor de ventanas)
 kitty             # Terminal
 waybar            # Barra de estado
 rofi              # Lanzador de aplicaciones
-swaybg            # Fondo de pantalla (Reemplazo de hyprpaper)
+swww              # Fondo de pantalla (Reemplazo de hyprpaper)
 wlogout           # Menú de salida/apagado
 dunst             # Notificaciones
 
